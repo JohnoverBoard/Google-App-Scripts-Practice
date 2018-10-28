@@ -1,3 +1,8 @@
+/*
+This is the app script for sending a confirmation based on the inputs of the spreadsheet formed after inputting from the form.
+Still need to figure out how to directly trigger from form and avoid repeated mailing (keep them in another category)
+*/
+
 function onFormSubmit(e) {
   Logger.log("[METHOD] onFormSubmit");
   var ssResponses = SpreadsheetApp.getActive().getSheetByName("Form responses 1");
