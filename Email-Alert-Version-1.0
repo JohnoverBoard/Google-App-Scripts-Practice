@@ -1,0 +1,49 @@
+function onFormSubmit(e) {
+  Logger.log("[METHOD] onFormSubmit");
+  var ssResponses = SpreadsheetApp.getActive().getSheetByName("Form responses 1");
+  var testRange = ssResponses.getRange(2,1,1,ssResponses.getLastColumn());
+  sendEmail(testRange);
+}
+
+function sendEmail(range) {
+  Logger.log("sendEmail");
+  
+  var value = range.getValues();
+  var row = value[0]; //this fetches the spreadsheet
+  
+  var EmailAddress = row[1];
+  var Name = row[2];
+  var Year = row[3];
+  var Branch = row[4];
+  var RoleInMECLABS = row[5];
+  var ProjectName = row[6];
+  var ProjectDescription = row[7];
+  var ProjectDomain = row[8];
+  var ProjectDifficulty = row[9];
+  var ProjectNotes = row[10];
+  var StudentDomain = row[11];
+  var StudentExperience = row[12];
+  var StudentNotes = row[13]; //this extract the values
+  
+  //if(ProjectNotes.length == 0) ProjectNotes = "None";
+  //if(StudentNotes.length == 0) StudentNotes = "None"; //this cleans the values
+  
+  var emailRecipients = EmailAddress;
+  var emailSubject = "ProjectBuilderMEC | "+RoleInMECLABS+": Thank you for joining, "+Name;
+  var emailBody = "Thank you for joining the program as a "+RoleInMECLABS+". \
+  We will inform you when a suitable match happens. Have a nice day!"//Prepare the email
+  
+  MailApp.sendEmail({
+  to: EmailAddress,
+  subject: emailSubject,
+  htmlBody: emailBody
+ });//this will send out the email to the  required user
+}
+
+/*function test() {
+  Logger.log("[METHOD] test");
+  
+  var ssResponses = SpreadsheetApp.getActive().getSheetByName("Form responses 1");
+  var testRange = ssResponses.getRange(2,1,1,ssResponses.getLastColumn());
+  sendEmail(testRange);
+}*/
